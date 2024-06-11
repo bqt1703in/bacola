@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug 
+include ../../mixins/heading.pug 
+include ../../mixins/pagination.pug 
+
+block main 
+    .container
+        +heading("Danh sách sản phẩm")
+        .row 
+            each product in products 
+                .col-3.mb-4.product-item
+                    .card-group
+                        .card
+                            .card-header
+                                img.card-img-top(src=product.thumbnail alt='...')
+                            .card-body
+                                a(href=`/products/${product.slug}`) 
+                                    h4.card-title #{product.title}
+                                h5.card-price $#{product.price}
+                                -var discount = (product.price - product.price*product.discountPercentage/100)
+                                -var discount = discount.toFixed(2)
+                                h4.card-discount $#{discount}
+                            .card-footer
+                                a(href=`/products/${product.slug}`).btn.btn-outline-success(type='button' data-id=product._id) Xem chi tiết 
+        +pagination(pagination)

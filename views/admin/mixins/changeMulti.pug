@@ -1,0 +1,11 @@
+mixin changeMulti()
+    form(action="/admin/products/change-multi?_method=PATCH" method="POST" form-change-multi).change-multi 
+        .input-group 
+            select#inputGroupSelect02.custom-select(name="type-change")
+                option(disabled="disabled" selected="selected") Chọn hành động
+                option(value='active') Hoạt động
+                option(value='inactive') Dừng hoạt động
+                option(value='delete-all') Xóa tất cả
+            .input-group-append
+                button.input-group-text(for='inputGroupSelect02' type="submit") Áp dụng
+            input(type="text" name="value-submit" class="d-none")

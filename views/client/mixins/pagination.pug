@@ -1,0 +1,17 @@
+mixin pagination(pagination)
+    nav(aria-label='Page navigation example')
+        ul.pagination
+            li.page-item
+                button.page-link(button-pagination = 1) Trang đầu
+            if (pagination.currentPage > 1)
+                li.page-item
+                    button.page-link(button-pagination = pagination.currentPage - 1) <<
+            -for (var i = 1; i <= pagination.totalPage; i++)
+                li(class = `${i == pagination.currentPage ? "page-item active" : "page-item"}`)
+                    button.page-link(button-pagination = i) #{i}
+            if (pagination.totalPage > pagination.currentPage)
+                li.page-item
+                    button.page-link(button-pagination = pagination.currentPage + 1) >>
+            button.page-link(button-pagination = pagination.totalPage) Trang cuối
+            
+

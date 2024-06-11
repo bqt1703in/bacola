@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug 
+include ../../mixins/pagination.pug 
+include ../../mixins/form-search.pug 
+include ../../mixins/filter.pug 
+include ../../mixins/changeMulti.pug 
+include ../../mixins/alert.pug 
+    
+
+block main 
+    .main
+        h1.title Danh sách sản phẩm
+        -if(messages.messages)
+             +alert-success(messages.messages)
+        .filter-search
+            .title Bộ lọc và tìm kiếm
+            .body
+                +filter()
+                a(href="/admin/products/create" class="btn btn-primary btn-create" style="color:white") 
+                    i(class="fa-solid fa-plus" style="margin-right: 5px")
+                    | Thêm mới 
+                +changeMulti()
+                +form-search()
+        table.table.table-bordered(checkbox-multi)
+            thead
+                tr
+                    td(scope='col')
+                        input(type="checkbox" name="check-all")
+                    th(scope='col') STT
+                    th(scope='col') Ảnh
+                    th(scope='col') Tên
+                    th(scope='col') Giá
+                    th(scope='col') Phần trăm giảm giá
+                    th(scope='col') Vị trí
+                    th(scope='col') Trạng thái
+                    th(scope='col').action Hành động
+            tbody
+                if (products.length > 0)
+                    each product,index in products
+                        tr 
+                            td 
+                                input(type="checkbox" name="id" value=product._id)
+                            th(scope='row') #{index + 1}
+                            td.img
+                                img(src=product.thumbnail, alt="")
+                            td.title #{product.title}
+                            td $#{product.price}
+                            td #{product.discountPercentage}%
+                            td #{product.position}
+                            td.status
+                                if (product.status == "active")
+                                    button(class="btn btn-success" button-change-status data-status="active" data-id=product._id) Hoạt động
+                                else 
+                                    button(class="btn btn-danger" button-change-status data-status="inactive" data-id=product._id) Không hoạt động
+                            td.action
+                                button(class= "btn btn-danger" button-delete data-id=product._id) Xóa
+                                a(href="" class= "btn btn-warning") Sửa
+                                a(href="" class= "btn btn-success") Chi tiết
+                else
+                    .not-found Không tìm thấy sản phẩm
+ 
+        +pagination(pagination) 
+
+    form(action="" method="POST" id="form-change-status") 
+    form(action="" method="POST" id="form-delete-item") 

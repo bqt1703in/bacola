@@ -1,0 +1,41 @@
+mixin form-create()
+    .container
+        h2.mb-4.text-center.pt-4 Thêm mới sản phẩm
+        form(action="/admin/products/create" method="POST" enctype="multipart/form-data")
+            .form-group
+                label(for="title") Tên sản phẩm
+                input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm")
+            .form-group
+                label(for="description") Mô tả sản phẩm
+                textarea#description.form-control(name="description" rows="5" placeholder="Nhập mô tả sản phẩm")
+            .d-flex
+                .form-group.mr-5
+                    label(for="price") Giá sản phẩm
+                    input#price.form-control(type="number" value="0" min="0" name="price" step="0.01" placeholder="Nhập giá sản phẩm")
+                .form-group.mr-5
+                    label(for="stock") Số lượng sản phẩm
+                    input.form-control(type="number" value="0" min="0" name="stock" id="stock" placeholder="Nhập số lượng sản phẩm")
+                .form-group.mr-5
+                    label(for="discountPercentage") Phần trăm giảm giá
+                    input.form-control(type="number" value="0" min="0" name="discountPercentage" id="discountPercentage" placeholder="Nhập phần trăm giảm giá")
+                .form-group.mr-5
+                    label(for="position") Vị trí
+                    input#position.form-control(type="number" name="position" placeholder="Tự động tăng")
+            .form-group.upload-image(upload-image)
+                label(for="thumbnail") Hình ảnh sản phẩm
+                input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
+                img.image-preview(src="", alt="")
+                .delete-image-preview.d-none
+                    i.fa-solid.fa-xmark(style="color: white")
+
+                //- input#title.form-control(type="text" name="thumbnail" placeholder="Đường dẫn hình ảnh")
+
+            .form-group
+                label Trạng thái sản phẩm
+                .form-check
+                    input#statusActive.form-check-input(type="radio" name="status" value="active" checked=true)
+                    label.form-check-label(for="statusActive")  Hoạt động
+                .form-check
+                    input#statusInactive.form-check-input(type="radio" name="status" value="inactive")
+                    label.form-check-label(for="statusInactive")  Không hoạt động
+            button.btn.btn-primary(type="submit") Thêm sản phẩm

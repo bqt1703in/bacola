@@ -1,0 +1,11 @@
+extends ../../layouts/default.pug 
+include ../../mixins/heading.pug 
+
+
+block main 
+    .container
+        +heading(`Chi tiết sản phẩm`)
+        .card-title Tên sản phẩm: #{product.title}
+        .card-title Giá: #{product.price}
+        img(src=product.thumbnail, alt="",)
+        

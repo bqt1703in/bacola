@@ -1,0 +1,43 @@
+.product-item .card {
+  transition: 0.7s;
+}
+.product-item .card .card-header {
+  border: none;
+  overflow: hidden;
+  padding: 0;
+}
+.product-item .card .card-img-top {
+  transition: 0.7s;
+  width: 250px;
+  height: 250px;
+}
+.product-item .card .card-img-top:hover {
+  transform: scale(1.2);
+}
+.product-item .card .card-price {
+  text-decoration: line-through;
+  color: #c2c2d3;
+}
+.product-item .card .card-discount {
+  color: #d51243;
+}
+.product-item .card .card-title {
+  min-height: 40.08px;
+  font-size: 17px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.product-item .card a {
+  text-decoration: none;
+  color: inherit;
+}
+.product-item .card:hover {
+  box-shadow: 0px 16px 48px 0px rgba(0, 0, 0, 0.176);
+}
+.product-item button {
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */

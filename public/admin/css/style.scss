@@ -1,0 +1,174 @@
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: #f8f9fa;
+}
+.sidebar {
+  height: 100vh;
+  background-color: #343a40;
+  color: #fff;
+  //   position: fixed;
+  padding-top: 20px;
+}
+.sidebar a {
+  color: #adb5bd;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.sidebar a:hover {
+  background-color: #495057;
+  color: #fff;
+}
+.sidebar .active {
+  background-color: #007bff;
+  color: #fff;
+}
+.sidebar-heading {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+}
+.content {
+  margin-left: 220px;
+  padding: 20px;
+}
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+.card-body {
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0px;
+}
+
+td.img {
+  width: 150px;
+  padding: 0px;
+  img {
+    width: 150px;
+  }
+}
+td.action {
+  display: flex;
+  border: none;
+  justify-content: space-between;
+  align-items: center;
+}
+th.action {
+  width: 234px;
+}
+td.status {
+  width: 186px;
+  button {
+    width: 100%;
+    outline: none;
+  }
+}
+
+td.title {
+  width: 390px;
+}
+
+input.input-search {
+  width: 400px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.btn-search {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.filter-search {
+  padding-bottom: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  .title {
+    background-color: #ddd;
+    padding: 10px;
+    font-size: 20px;
+  }
+}
+
+h1.title {
+  text-align: center;
+  padding: 10px;
+  background-color: #ddd;
+  font-size: 30px;
+}
+.d-flex {
+  display: flex;
+}
+.main {
+  padding-left: 16px;
+  position: relative;
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 0 10px;
+
+  button {
+    margin-right: 10px;
+  }
+  a {
+    color: white;
+    i {
+      margin-right: 4px;
+    }
+  }
+}
+
+.d-none {
+  display: none;
+}
+.form-search {
+  margin-top: 7px;
+}
+
+a.btn-create {
+  color: white;
+  i {
+    margin-right: 5px;
+  }
+}
+.alert {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+}
+.image-preview {
+  width: 200px;
+  border: 1px solid #ddd;
+}
+.delete-image-preview {
+  padding: 0px 6px;
+  background-color: red;
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+
+  cursor: pointer;
+}
+.upload-image {
+  position: relative;
+}
+.input-image {
+  margin-bottom: 10px;
+}

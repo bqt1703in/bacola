@@ -1,0 +1,10 @@
+extends ../../layouts/default.pug
+include ../../mixins/form-create.pug
+include ../../mixins/alert.pug
+
+
+
+block main 
+    if (messages.messages)
+        +alert-error(messages.messages)
+    +form-create()

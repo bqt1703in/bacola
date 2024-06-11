@@ -1,0 +1,44 @@
+.container-fluid
+  .row
+    // Sidebar
+    nav.col-md-2.d-none.d-md-block.sidebar
+      .sidebar-sticky
+        h5.sidebar-heading Admin
+        ul.nav.flex-column
+          li.nav-item
+            a.nav-link.active(href='#')
+              i.fas.fa-tachometer-alt
+              |  Dashboard
+          li.nav-item
+            a.nav-link(href='#')
+              i.fas.fa-users
+              |  Users
+          li.nav-item
+            a.nav-link(href='#')
+              i.fas.fa-cogs
+              |  Settings
+    // Content
+    main.col-md-9.ml-sm-auto.col-lg-10.px-4.content(role='main')
+      h2 Dashboard
+      .row
+        .col-md-4
+          .card.mb-4
+            .card-header
+              | Card 1
+            .card-body
+              p.card-text
+                | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+        .col-md-4
+          .card.mb-4
+            .card-header
+              | Card 2
+            .card-body
+              p.card-text
+                | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+        .col-md-4
+          .card.mb-4
+            .card-header
+              | Card 3
+            .card-body
+              p.card-text
+                | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
