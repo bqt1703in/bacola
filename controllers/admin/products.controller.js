@@ -72,6 +72,7 @@ module.exports.changeMulti = async (req, res) => {
 };
 module.exports.delete = async (req, res) => {
   await Product.updateOne({ _id: req.params.id }, { deleted: true });
+  req.flash("messages", "Xóa sản phẩm thành công");
   res.redirect("back");
 };
 
@@ -97,4 +98,31 @@ module.exports.createPost = async (req, res) => {
   const product = new Product(req.body);
   await product.save();
   res.redirect("/admin/products");
+};
+
+module.exports.edit = async (req, res) => {
+  try {
+    const product = await Product.findOne({ _id: req.params.id });
+    res.render("admin/pages/products/edit.pug", {
+      pageTitle: "Chỉnh sửa sản phẩm",
+      product: product,
+    });
+    req.flash("messages", "Cập nhật thông tin sản phẩm thành công");
+  } catch (error) {
+    res.redirect("/admin/products");
+  }
+};
+
+module.exports.editPatch = async (req, res) => {
+  req.body.position = parseInt(req.body.position);
+  req.body.price = parseInt(req.body.price);
+  req.body.stock = parseInt(req.body.stock);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;
+  }
+  try {
+    await Product.updateOne({ _id: req.params.id }, req.body);
+  } catch (error) {}
+  res.redirect("back");
 };

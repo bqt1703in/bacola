@@ -53,7 +53,7 @@ block main
                                     button(class="btn btn-danger" button-change-status data-status="inactive" data-id=product._id) Không hoạt động
                             td.action
                                 button(class= "btn btn-danger" button-delete data-id=product._id) Xóa
-                                a(href="" class= "btn btn-warning") Sửa
+                                a(href=`/admin/products/edit/${product._id}` class= "btn btn-warning") Sửa
                                 a(href="" class= "btn btn-success") Chi tiết
                 else
                     .not-found Không tìm thấy sản phẩm
