@@ -1,8 +1,13 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/alert.pug
 
 block main 
     .container
+        if (messages.error)
+            +alert-error(messages.error)
+        if (messages.success) 
+            +alert-success(messages.success)
+
         h2.mb-4.text-center.pt-4 Chỉnh sửa sản phẩm
         form(action=`/admin/products/edit/${product._id}?_method=PATCH` method="POST" enctype="multipart/form-data")
             .form-group
@@ -26,7 +31,8 @@ block main
                     input#position.form-control(type="number" name="position" placeholder="Tự động tăng" value=product.position)
             .form-group.upload-image(upload-image)
                 label(for="thumbnail") Hình ảnh sản phẩm
-                input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*" value="HÌnh ảnh")
+                input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
+                span.d-none.imgName #{imgName}
                 img.image-preview(src=product.thumbnail, alt="")
                 .delete-image-preview.d-none
                     i.fa-solid.fa-xmark(style="color: white")

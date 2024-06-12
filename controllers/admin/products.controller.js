@@ -106,6 +106,7 @@ module.exports.edit = async (req, res) => {
     res.render("admin/pages/products/edit.pug", {
       pageTitle: "Chỉnh sửa sản phẩm",
       product: product,
+      imgName: product.thumbnail.split("/")[2],
     });
     req.flash("messages", "Cập nhật thông tin sản phẩm thành công");
   } catch (error) {
@@ -124,5 +125,18 @@ module.exports.editPatch = async (req, res) => {
   try {
     await Product.updateOne({ _id: req.params.id }, req.body);
   } catch (error) {}
+  req.flash("success", "Cập nhật thông tin sản phẩm thành công");
   res.redirect("back");
+};
+
+module.exports.detail = async (req, res) => {
+  try {
+    const product = await Product.findOne({ _id: req.params.id });
+    res.render("admin/pages/products/detail.pug", {
+      pageTitle: product.title,
+      product: product,
+    });
+  } catch (error) {
+    res.redirect("/admin/products");
+  }
 };

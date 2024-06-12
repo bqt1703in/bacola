@@ -54,7 +54,7 @@ block main
                             td.action
                                 button(class= "btn btn-danger" button-delete data-id=product._id) Xóa
                                 a(href=`/admin/products/edit/${product._id}` class= "btn btn-warning") Sửa
-                                a(href="" class= "btn btn-success") Chi tiết
+                                a(href=`/admin/products/detail/${product._id}` class= "btn btn-success") Chi tiết
                 else
                     .not-found Không tìm thấy sản phẩm
  

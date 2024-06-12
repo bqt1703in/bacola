@@ -175,7 +175,7 @@ if (uploadImage) {
     buttonDeleteImagePreview.classList.remove("d-none");
     buttonDeleteImagePreview.classList.add("d-block");
   });
-
+  // Xử lí xóa ảnh xem trước
   if (buttonDeleteImagePreview) {
     buttonDeleteImagePreview.addEventListener("click", () => {
       inputImage.value = "";
@@ -185,5 +185,3 @@ if (uploadImage) {
     });
   }
 }
-
-// Xử lí xóa ảnh xem trước
