@@ -92,9 +92,6 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
-  if (req.file) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-  }
   const product = new Product(req.body);
   await product.save();
   res.redirect("/admin/products");
@@ -108,7 +105,6 @@ module.exports.edit = async (req, res) => {
       product: product,
       imgName: product.thumbnail.split("/")[2],
     });
-    req.flash("messages", "Cập nhật thông tin sản phẩm thành công");
   } catch (error) {
     res.redirect("/admin/products");
   }

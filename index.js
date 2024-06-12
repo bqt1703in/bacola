@@ -14,7 +14,7 @@ const Router = require("./routes/index.route");
 const database = require("./config/database");
 database.connect();
 
-app.set("views", __dirname + "/views");
+app.set("views", `${__dirname}/views`);
 app.set("views engine", "pug");
 app.use(express.static(`${__dirname}/public`));
 
