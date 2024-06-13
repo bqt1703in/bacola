@@ -29,8 +29,17 @@ module.exports.index = async (req, res) => {
     countProduct,
     req.query
   );
+
+  let sort = {};
+  if (req.query.sort) {
+    const [keySort, valueSort] = req.query.sort.split("-");
+    sort[keySort] = valueSort;
+  } else {
+    sort.position = "desc";
+  }
+
   const products = await Product.find(find)
-    .sort({ position: "desc" })
+    .sort(sort)
     .limit(objPagination.limitItems)
     .skip(objPagination.skip);
 
@@ -94,6 +103,7 @@ module.exports.createPost = async (req, res) => {
   }
   const product = new Product(req.body);
   await product.save();
+  req.flash("messages", "Thêm sản phẩm thành công");
   res.redirect("/admin/products");
 };
 

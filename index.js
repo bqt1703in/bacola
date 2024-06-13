@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const PORT = 3030;
 
 const flash = require("express-flash");
@@ -24,6 +25,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser("quangtruong1703"));
 app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
+
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "node_modules", "tinymce"))
+);
 
 Router(app);
 app.listen(PORT, () => {

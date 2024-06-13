@@ -5,6 +5,6 @@ include ../../mixins/alert.pug
 
 
 block main 
-    if (messages.messages)
-        +alert-error(messages.messages)
+    if (messages.error)
+        +alert-error(messages.error)
     +form-create()

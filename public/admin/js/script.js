@@ -106,7 +106,6 @@ if (formChangeMulti) {
     e.preventDefault();
     const checkeds = document.querySelectorAll("input[name='id']:checked");
     const typeChange = e.target.elements["type-change"].value;
-    console.log(typeChange);
     if (typeChange == "delete-all") {
       const isConfirm = confirm("Bạn chắc chắn muốn xóa các sản phẩm này?");
       if (!isConfirm) {
@@ -139,7 +138,6 @@ if (buttonDelete.length > 0) {
         return;
       }
       const id = button.getAttribute("data-id");
-      console.log(id);
       formDelete.action = `/admin/products/delete/${id}?_method=DELETE`;
       formDelete.submit();
     });
@@ -184,4 +182,25 @@ if (uploadImage) {
       buttonDeleteImagePreview.classList.add("d-none");
     });
   }
+}
+// Xử lí sắp xếp
+const formSort = document.querySelector("[form-sort]");
+if (formSort) {
+  const sort = document.querySelector("[sort]");
+  const buttonSort = document.querySelector("[button-sort]");
+  let url = new URL(window.location.href);
+  buttonSort.addEventListener("click", () => {
+    const value = sort.value;
+    if (value != "default") {
+      url.searchParams.set("sort", value);
+      window.location.href = url.href;
+    } else {
+      url.searchParams.delete("sort");
+      window.location.href = url.href;
+    }
+  });
+
+  const value = url.searchParams.get("sort");
+  const optionSelected = formSort.querySelector(`option[value=${value}]`);
+  optionSelected.selected = true;
 }

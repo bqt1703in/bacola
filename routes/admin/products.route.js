@@ -33,6 +33,7 @@ router.patch(
   "/edit/:id",
   upload.single("thumbnail"),
   validate.createPost,
+  uploadImgToCloudMiddleware,
   controller.editPatch
 );
 
