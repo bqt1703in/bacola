@@ -49,7 +49,7 @@ block main
                                     button(class="btn btn-danger" button-change-status data-status="inactive" data-id=category._id) Không hoạt động
                             td.action
                                 button(class= "btn btn-danger" button-delete data-id=category._id) Xóa
-                                a(href=`/admin/categorys/edit/${category._id}` class= "btn btn-warning") Sửa
+                                a(href=`/admin/products-categories/edit/${category._id}` class= "btn btn-warning") Sửa
                 else
                     .not-found Không tìm thấy sản phẩm
     form(action="" method="POST" id="form-change-status") 

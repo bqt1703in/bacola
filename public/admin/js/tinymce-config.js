@@ -1,15 +1,8 @@
-// tinymce.init({
-//   selector: "textarea.textarea-mce",
-//   plugins: "advlist link image lists",
-// });
-
 tinymce.init({
   selector: "textarea.textarea-mce",
   plugins: "image link",
-  image_title: true,
-  automatic_uploads: true,
-  images_upload_url: "/upload",
-  file_picker_types: "image",
+  // image_title: true,
+  // file_picker_types: "image",
   file_picker_callback: function (cb, value, meta) {
     var input = document.createElement("input");
     input.setAttribute("type", "file");

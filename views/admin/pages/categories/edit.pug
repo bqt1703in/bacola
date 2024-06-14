@@ -3,47 +3,46 @@ include ../../mixins/form-create.pug
 include ../../mixins/alert.pug
 include ../../mixins/select-tree.pug
 
-
-
 block main
     if (messages.error)
         +alert-error(messages.error)
+    if (messages.success)
+        +alert-success(messages.error)
     .container
         h2.mb-4.text-center.pt-4 Tạo mới danh mục sản phẩm
-        form(action="/admin/products-categories/create" method="POST" enctype="multipart/form-data")
+        form(action=`/admin/products-categories/edit/${category._id}?_method=PATCH` method="POST" enctype="multipart/form-data")
             .form-group
                 label(for="title") Tên danh mục
-                input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm")
+                input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm" value=category.title)
             .form-group
                 label(for="description") Mô tả danh mục
-                textarea#description.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả sản phẩm")
+                textarea#description.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả sản phẩm" value=category.description) #{category.description}
             .d-flex
                 .form-group.mr-5
-                  
                     label(for="parent") Danh mục cha
                     select(name="parent" id="parent inputGroupSelect02" class="custom-select")
                         option(selected="selected" value="") Trống
                         if (categories.length > 0) 
-                            +select-tree(categories)
+                            +select-tree(categories, 1, category.parent)
                 //- .form-group
                 //-     label(for="parent") Danh mục cha
                 //-     input#title.form-control(type="text" name="parent" placeholder="Nhập tên sản phẩm")
                 .form-group.mr-5
                     label(for="position") Vị trí
-                    input#position.form-control(type="number" name="position" placeholder="Tự động tăng")
+                    input#position.form-control(type="number" name="position" placeholder="Tự động tăng" value=category.position)
                 .form-group
                     label Trạng thái danh mục
                     .d-flex
                         .form-check(style="margin-right:20px")
-                            input#statusActive.form-check-input(type="radio" name="status" value="active" checked=true)
+                            input#statusActive.form-check-input(type="radio" name="status" value="active" checked=category.status == "active" ? true : false)
                             label.form-check-label(for="statusActive")  Hoạt động
                         .form-check
-                            input#statusInactive.form-check-input(type="radio" name="status" value="inactive")
+                            input#statusInactive.form-check-input(type="radio" name="status" value="inactive" checked=category.status == "inactive" ? true : false)
                             label.form-check-label(for="statusInactive")  Không hoạt động
             .form-group.upload-image(upload-image)
                 label(for="thumbnail") Hình ảnh đại diện
                 input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
-                img.image-preview(src="", alt="")
+                img.image-preview(src=category.thumbnail, alt="")
                 .delete-image-preview.d-none
                     i.fa-solid.fa-xmark(style="color: white")
             

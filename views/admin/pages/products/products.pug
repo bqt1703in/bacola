@@ -44,7 +44,7 @@ block main
                         tr 
                             td 
                                 input(type="checkbox" name="id" value=product._id)
-                            th(scope='row') #{index + 1}
+                            th(scope='row') #{pagination.limitItems*(pagination.currentPage - 1) + (index + 1)}
                             td.img
                                 img(src=product.thumbnail, alt="")
                             td.title #{product.title}
