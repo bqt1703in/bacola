@@ -78,6 +78,13 @@ module.exports.edit = async (req, res) => {
 };
 
 module.exports.editPatch = async (req, res) => {
-  console.log(req.body);
-  res.send("Ok");
+  try {
+    req.body.position = parseInt(req.body.position);
+    await Categories.updateOne({ _id: req.params.id }, req.body);
+    req.flash("success", "Cập nhật thành công");
+  } catch (error) {
+    req.flash("error", "Đã xãy ra lỗi, vui lòng thử lại!");
+    res.redirect("/admin/products-categories");
+  }
+  res.redirect("back");
 };

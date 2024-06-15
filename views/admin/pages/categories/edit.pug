@@ -7,7 +7,7 @@ block main
     if (messages.error)
         +alert-error(messages.error)
     if (messages.success)
-        +alert-success(messages.error)
+        +alert-success(messages.success)
     .container
         h2.mb-4.text-center.pt-4 Tạo mới danh mục sản phẩm
         form(action=`/admin/products-categories/edit/${category._id}?_method=PATCH` method="POST" enctype="multipart/form-data")
@@ -46,4 +46,4 @@ block main
                 .delete-image-preview.d-none
                     i.fa-solid.fa-xmark(style="color: white")
             
-            button.btn.btn-primary(type="submit") Tạo danh mục
+            button.btn.btn-primary(type="submit") Cập nhật
