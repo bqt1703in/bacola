@@ -47,9 +47,10 @@ block main
                                     button(class="btn btn-success" button-change-status data-status="active" data-id=category._id) Hoạt động
                                 else 
                                     button(class="btn btn-danger" button-change-status data-status="inactive" data-id=category._id) Không hoạt động
-                            td.action
-                                button(class= "btn btn-danger" button-delete data-id=category._id) Xóa
-                                a(href=`/admin/products-categories/edit/${category._id}` class= "btn btn-warning") Sửa
+                            td
+                                .action
+                                    button(class= "btn btn-danger" button-delete data-id=category._id) Xóa
+                                    a(href=`/admin/products-categories/edit/${category._id}` class= "btn btn-warning") Sửa
                 else
                     .not-found Không tìm thấy sản phẩm
     form(action="" method="POST" id="form-change-status") 

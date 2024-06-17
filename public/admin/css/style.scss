@@ -61,15 +61,15 @@ td.img {
     width: 150px;
   }
 }
-td.action {
+.action {
   display: flex;
-  border: none;
   justify-content: space-between;
   align-items: center;
 }
 th.action {
   width: 234px;
 }
+
 td.status {
   width: 186px;
   button {

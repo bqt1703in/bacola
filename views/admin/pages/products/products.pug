@@ -56,10 +56,11 @@ block main
                                     button(class="btn btn-success" button-change-status data-status="active" data-id=product._id) Hoạt động
                                 else 
                                     button(class="btn btn-danger" button-change-status data-status="inactive" data-id=product._id) Không hoạt động
-                            td.action
-                                button(class= "btn btn-danger" button-delete data-id=product._id) Xóa
-                                a(href=`/admin/products/edit/${product._id}` class= "btn btn-warning") Sửa
-                                a(href=`/admin/products/detail/${product._id}` class= "btn btn-success") Chi tiết
+                            td
+                                .action
+                                    button(class= "btn btn-danger" button-delete data-id=product._id) Xóa
+                                    a(href=`/admin/products/edit/${product._id}` class= "btn btn-warning") Sửa
+                                    a(href=`/admin/products/detail/${product._id}` class= "btn btn-success") Chi tiết
                 else
                     .not-found Không tìm thấy sản phẩm
  

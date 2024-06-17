@@ -70,9 +70,8 @@ td.img img {
   width: 150px;
 }
 
-td.action {
+.action {
   display: flex;
-  border: none;
   justify-content: space-between;
   align-items: center;
 }
