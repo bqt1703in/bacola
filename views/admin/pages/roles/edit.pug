@@ -1,0 +1,22 @@
+extends ../../layouts/default.pug
+
+include ../../mixins/alert.pug
+
+
+
+block main 
+    if (messages.error)
+        +alert-error(messages.error)
+    if (messages.success)
+        +alert-success(messages.success)
+    .container
+        h2.mb-4.text-center.pt-4 Sửa nhóm quyền nè
+        form(action=`/admin/roles/edit/${role._id}?_method=PATCH` method="POST")
+            .form-group
+                label(for="title") Tên nhóm quyền
+                input#title.form-control(type="text" name="title" placeholder="Nhập tên nhóm quyền" value=role.title)
+            .form-group
+                label(for="description") Mô tả nhóm quyền
+                textarea#description.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả nhóm quyền" value=role.description) #{role.description}
+            button.btn.btn-primary(type="submit") Cập nhật
+    
