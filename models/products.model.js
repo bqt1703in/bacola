@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("strictQuery", true);
 const slug = require("mongoose-slug-updater");
 mongoose.plugin(slug);
 const productSchema = new mongoose.Schema(
