@@ -1,0 +1,51 @@
+extends ../../layouts/default.pug 
+include ../../mixins/pagination.pug 
+include ../../mixins/form-search.pug 
+include ../../mixins/filter.pug 
+include ../../mixins/changeMulti.pug 
+include ../../mixins/alert.pug 
+include ../../mixins/sort.pug 
+
+block main 
+    .main
+        h1.title Danh sách tài khoản
+        -if(messages.success)
+             +alert-success(messages.success)
+        .filter-search
+            a(href="/admin/accounts/create" class="btn btn-primary btn-create" style="color:white") 
+                i(class="fa-solid fa-plus" style="margin-right: 5px")
+                | Thêm mới 
+        table.table.table-bordered(checkbox-multi)
+            thead
+                tr
+                    td(scope='col')
+                        input(type="checkbox" name="check-all")
+                    th(scope='col') STT
+                    th(scope='col') Tên
+                    th(scope='col') Email
+                    th(scope='col') Số điện thoại
+                    th(scope='col') Quyền
+                    th(scope='col').action Hành động
+            tbody
+                if (accounts.length > 0)
+                    each account,index in accounts
+                        tr 
+                            td 
+                                input(type="checkbox" name="id")
+                            th(scope='row') #{index + 1}
+                            td.title #{account.fullName}
+                            td #{account.email}
+                            td #{account.phone}
+                            td #{account.roleTitle}
+                                        
+                            td
+                                .action
+                                    button(class= "btn btn-danger" button-delete) Xóa
+                                    a(href=`/admin/accounts/edit/${account._id}` class= "btn btn-warning") Sửa
+                                    a(href=`/admin/accounts/detail/${account._id}` class= "btn btn-success") Chi tiết
+                else
+                    tr Không tìm thấy nhóm quyền nào
+    form(action="" method="POST" id="form-change-status") 
+    form(action="" method="POST" id="form-delete-item") 
+        
+                

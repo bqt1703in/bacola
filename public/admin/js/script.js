@@ -204,3 +204,12 @@ if (formSort) {
   const optionSelected = formSort.querySelector(`option[value=${value}]`);
   optionSelected.selected = true;
 }
+
+const showPassword = () => {
+  const inputPassword = document.querySelector("input[name='password']");
+  if (inputPassword.type == "password") {
+    inputPassword.type = "text";
+  } else {
+    inputPassword.type = "password";
+  }
+};
