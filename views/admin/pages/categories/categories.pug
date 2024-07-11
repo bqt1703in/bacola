@@ -6,52 +6,57 @@ include ../../mixins/changeMulti.pug
 include ../../mixins/alert.pug 
 include ../../mixins/sort.pug 
 
-block main 
-    .main
-        h1.title Danh mục sản phẩm
-        -if(messages.messages)
-             +alert-success(messages.messages)
-        .filter-search
-            .title Bộ lọc và tìm kiếm
-            .body
-                +filter()
-                a(href="/admin/products-categories/create" class="btn btn-primary btn-create" style="color:white") 
-                    i(class="fa-solid fa-plus" style="margin-right: 5px")
-                    | Thêm mới 
-                +changeMulti()
-                +form-search()
-        table.table.table-bordered(checkbox-multi)
-            thead
-                tr
-                    td(scope='col')
-                        input(type="checkbox" name="check-all")
-                    th(scope='col') STT
-                    th(scope='col') Ảnh
-                    th(scope='col') Tên
-                    th(scope='col') Vị trí
-                    th(scope='col') Trạng thái
-                    th(scope='col').action Hành động
-            tbody
-                if (categories.length > 0)
-                    each category,index in categories
-                        tr 
-                            td 
-                                input(type="checkbox" name="id" value=category._id)
-                            th(scope='row') #{index + 1}
-                            td.img
-                                img(src=category.thumbnail, alt="")
-                            td.title #{category.title}
-                            td #{category.position}
-                            td.status
-                                if (category.status == "active")
-                                    button(class="btn btn-success" button-change-status data-status="active" data-id=category._id) Hoạt động
-                                else 
-                                    button(class="btn btn-danger" button-change-status data-status="inactive" data-id=category._id) Không hoạt động
-                            td
-                                .action
-                                    button(class= "btn btn-danger" button-delete data-id=category._id) Xóa
-                                    a(href=`/admin/products-categories/edit/${category._id}` class= "btn btn-warning") Sửa
-                else
-                    .not-found Không tìm thấy sản phẩm
-    form(action="" method="POST" id="form-change-status") 
-    form(action="" method="POST" id="form-delete-item") 
+block main
+    if (role_user.permissions.includes("category_view"))
+        .main
+            h1.title Danh mục sản phẩm
+            -if(messages.messages)
+                +alert-success(messages.messages)
+            .filter-search
+                .title Bộ lọc và tìm kiếm
+                .body
+                    +filter()
+                    if (role_user.permissions.includes("category_create"))
+                        a(href="/admin/products-categories/create" class="btn btn-primary btn-create" style="color:white") 
+                            i(class="fa-solid fa-plus" style="margin-right: 5px")
+                            | Thêm mới 
+                    +changeMulti()
+                    +form-search()
+            table.table.table-bordered(checkbox-multi)
+                thead
+                    tr
+                        td(scope='col')
+                            input(type="checkbox" name="check-all")
+                        th(scope='col') STT
+                        th(scope='col') Ảnh
+                        th(scope='col') Tên
+                        th(scope='col') Vị trí
+                        th(scope='col') Trạng thái
+                        th(scope='col').action Hành động
+                tbody
+                    if (categories.length > 0)
+                        each category,index in categories
+                            tr 
+                                td 
+                                    input(type="checkbox" name="id" value=category._id)
+                                th(scope='row') #{index + 1}
+                                td.img
+                                    img(src=category.thumbnail, alt="")
+                                td.title #{category.title}
+                                td #{category.position}
+                                td.status
+                                    if (category.status == "active")
+                                        button(class="btn btn-success" button-change-status data-status="active" data-id=category._id) Hoạt động
+                                    else 
+                                        button(class="btn btn-danger" button-change-status data-status="inactive" data-id=category._id) Không hoạt động
+                                td
+                                    .action
+                                        if (role_user.permissions.includes("category_delete"))
+                                            button(class= "btn btn-danger" button-delete data-id=category._id) Xóa
+                                        a(href=`/admin/products-categories/edit/${category._id}` class= "btn btn-warning") Sửa
+                    else
+                        .not-found Không tìm thấy sản phẩm
+        form(action="" method="POST" id="form-change-status") 
+        form(action="" method="POST" id="form-delete-item")
+    else 
+        h1 Bạn không có quyền truy cập trang này 

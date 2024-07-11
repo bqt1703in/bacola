@@ -6,45 +6,48 @@ include ../../mixins/select-tree.pug
 
 
 block main
-    if (messages.error)
-        +alert-error(messages.error)
-    .container
-        h2.mb-4.text-center.pt-4 Tạo mới danh mục sản phẩm
-        form(action="/admin/products-categories/create" method="POST" enctype="multipart/form-data")
-            .form-group
-                label(for="title") Tên danh mục
-                input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm")
-            .form-group
-                label(for="description") Mô tả danh mục
-                textarea#description.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả sản phẩm")
-            .d-flex
-                .form-group.mr-5
-                  
-                    label(for="parent") Danh mục cha
-                    select(name="parent" id="parent inputGroupSelect02" class="custom-select")
-                        option(selected="selected" value="") Trống
-                        if (categories.length > 0) 
-                            +select-tree(categories)
-                //- .form-group
-                //-     label(for="parent") Danh mục cha
-                //-     input#title.form-control(type="text" name="parent" placeholder="Nhập tên sản phẩm")
-                .form-group.mr-5
-                    label(for="position") Vị trí
-                    input#position.form-control(type="number" name="position" placeholder="Tự động tăng")
+    if (role_user.permissions.includes("category_create"))
+        if (messages.error)
+            +alert-error(messages.error)
+        .container
+            h2.mb-4.text-center.pt-4 Tạo mới danh mục sản phẩm
+            form(action="/admin/products-categories/create" method="POST" enctype="multipart/form-data")
                 .form-group
-                    label Trạng thái danh mục
-                    .d-flex
-                        .form-check(style="margin-right:20px")
-                            input#statusActive.form-check-input(type="radio" name="status" value="active" checked=true)
-                            label.form-check-label(for="statusActive")  Hoạt động
-                        .form-check
-                            input#statusInactive.form-check-input(type="radio" name="status" value="inactive")
-                            label.form-check-label(for="statusInactive")  Không hoạt động
-            .form-group.upload-image(upload-image)
-                label(for="thumbnail") Hình ảnh đại diện
-                input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
-                img.image-preview(src="", alt="")
-                .delete-image-preview.d-none
-                    i.fa-solid.fa-xmark(style="color: white")
-            
-            button.btn.btn-primary(type="submit") Tạo danh mục
+                    label(for="title") Tên danh mục
+                    input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm")
+                .form-group
+                    label(for="description") Mô tả danh mục
+                    textarea#description.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả sản phẩm")
+                .d-flex
+                    .form-group.mr-5
+                    
+                        label(for="parent") Danh mục cha
+                        select(name="parent" id="parent inputGroupSelect02" class="custom-select")
+                            option(selected="selected" value="") Trống
+                            if (categories.length > 0) 
+                                +select-tree(categories)
+                    //- .form-group
+                    //-     label(for="parent") Danh mục cha
+                    //-     input#title.form-control(type="text" name="parent" placeholder="Nhập tên sản phẩm")
+                    .form-group.mr-5
+                        label(for="position") Vị trí
+                        input#position.form-control(type="number" name="position" placeholder="Tự động tăng")
+                    .form-group
+                        label Trạng thái danh mục
+                        .d-flex
+                            .form-check(style="margin-right:20px")
+                                input#statusActive.form-check-input(type="radio" name="status" value="active" checked=true)
+                                label.form-check-label(for="statusActive")  Hoạt động
+                            .form-check
+                                input#statusInactive.form-check-input(type="radio" name="status" value="inactive")
+                                label.form-check-label(for="statusInactive")  Không hoạt động
+                .form-group.upload-image(upload-image)
+                    label(for="thumbnail") Hình ảnh đại diện
+                    input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
+                    img.image-preview(src="", alt="")
+                    .delete-image-preview.d-none
+                        i.fa-solid.fa-xmark(style="color: white")
+                
+                button.btn.btn-primary(type="submit") Tạo danh mục
+    else 
+        h1 Bạn không có quyền truy cập trang này

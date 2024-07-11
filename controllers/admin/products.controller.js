@@ -1,6 +1,7 @@
 const Product = require("../../models/products.model");
 const paginationHelper = require("../../helpers/pagination");
 const searchHelper = require("../../helpers/search");
+const Account = require("../../models/accounts.model");
 
 module.exports.index = async (req, res) => {
   const find = {
@@ -42,6 +43,14 @@ module.exports.index = async (req, res) => {
     .sort(sort)
     .limit(objPagination.limitItems)
     .skip(objPagination.skip);
+  for (const product of products) {
+    const user = await Account.findOne({
+      _id: product.createdBy.account_id,
+    });
+    if (user) {
+      product.fullName = user.fullName;
+    }
+  }
 
   res.render("admin/pages/products/products.pug", {
     pageTitle: "Danh sách sản phẩm",
@@ -95,6 +104,10 @@ module.exports.createPost = async (req, res) => {
   req.body.price = parseFloat(req.body.price);
   req.body.discountPercentage = parseFloat(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
+  req.body.createdBy = {
+    account_id: res.locals.user.id,
+  };
+
   if (!req.body.position) {
     const countProduct = await Product.count();
     req.body.position = countProduct + 1;

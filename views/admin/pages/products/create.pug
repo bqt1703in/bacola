@@ -5,6 +5,9 @@ include ../../mixins/alert.pug
 
 
 block main 
-    if (messages.error)
-        +alert-error(messages.error)
-    +form-create()
+    if (role_user.permissions.includes("products_create"))
+        if (messages.error)
+            +alert-error(messages.error)
+        +form-create()
+    else 
+        h1 Bạn không có quyền truy cập trang này

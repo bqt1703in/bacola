@@ -2,46 +2,49 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main 
-    .container
-        if (messages.error)
-            +alert-error(messages.error)
-        if (messages.success) 
-            +alert-success(messages.success)
+    if (role_user.permissions.includes("products_edit"))
+        .container
+            if (messages.error)
+                +alert-error(messages.error)
+            if (messages.success) 
+                +alert-success(messages.success)
 
-        h2.mb-4.text-center.pt-4 Chỉnh sửa sản phẩm
-        form(action=`/admin/products/edit/${product._id}?_method=PATCH` method="POST" enctype="multipart/form-data")
-            .form-group
-                label(for="title") Tên sản phẩm
-                input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm" value=product.title)
-            .form-group
-                label(for="description") Mô tả sản phẩm
-                textarea.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả sản phẩm" value=product.description) #{product.description}
-            .d-flex
-                .form-group.mr-5
-                    label(for="price") Giá sản phẩm
-                    input#price.form-control(type="number" value=product.price min="0" name="price" step="0.01" placeholder="Nhập giá sản phẩm")
-                .form-group.mr-5
-                    label(for="stock") Số lượng sản phẩm
-                    input.form-control(type="number" value=product.stock min="0" name="stock" id="stock" placeholder="Nhập số lượng sản phẩm")
-                .form-group.mr-5
-                    label(for="discountPercentage") Phần trăm giảm giá
-                    input.form-control(type="number" value=product.discountPercentage min="0" name="discountPercentage" id="discountPercentage" placeholder="Nhập phần trăm giảm giá")
-                .form-group.mr-5
-                    label(for="position") Vị trí
-                    input#position.form-control(type="number" name="position" placeholder="Tự động tăng" value=product.position)
-            .form-group.upload-image(upload-image)
-                label(for="thumbnail") Hình ảnh sản phẩm
-                input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
-                span.d-none.imgName #{imgName}
-                img.image-preview(src=product.thumbnail, alt="")
-                .delete-image-preview.d-none
-                    i.fa-solid.fa-xmark(style="color: white")
-            .form-group
-                label Trạng thái sản phẩm
-                .form-check
-                    input#statusActive.form-check-input(type="radio" name="status" value="active" checked=product.status == "active" ? true : false)
-                    label.form-check-label(for="statusActive")  Hoạt động
-                .form-check
-                    input#statusInactive.form-check-input(type="radio" name="status" value="inactive" checked=product.status == "inactive" ? true : false)
-                    label.form-check-label(for="statusInactive")  Không hoạt động
-            button.btn.btn-primary(type="submit") Cập nhật
+            h2.mb-4.text-center.pt-4 Chỉnh sửa sản phẩm
+            form(action=`/admin/products/edit/${product._id}?_method=PATCH` method="POST" enctype="multipart/form-data")
+                .form-group
+                    label(for="title") Tên sản phẩm
+                    input#title.form-control(type="text" name="title" placeholder="Nhập tên sản phẩm" value=product.title)
+                .form-group
+                    label(for="description") Mô tả sản phẩm
+                    textarea.form-control.textarea-mce(name="description" rows="5" placeholder="Nhập mô tả sản phẩm" value=product.description) #{product.description}
+                .d-flex
+                    .form-group.mr-5
+                        label(for="price") Giá sản phẩm
+                        input#price.form-control(type="number" value=product.price min="0" name="price" step="0.01" placeholder="Nhập giá sản phẩm")
+                    .form-group.mr-5
+                        label(for="stock") Số lượng sản phẩm
+                        input.form-control(type="number" value=product.stock min="0" name="stock" id="stock" placeholder="Nhập số lượng sản phẩm")
+                    .form-group.mr-5
+                        label(for="discountPercentage") Phần trăm giảm giá
+                        input.form-control(type="number" value=product.discountPercentage min="0" name="discountPercentage" id="discountPercentage" placeholder="Nhập phần trăm giảm giá")
+                    .form-group.mr-5
+                        label(for="position") Vị trí
+                        input#position.form-control(type="number" name="position" placeholder="Tự động tăng" value=product.position)
+                .form-group.upload-image(upload-image)
+                    label(for="thumbnail") Hình ảnh sản phẩm
+                    input#productImage.form-control-file.input-image(type="file" name="thumbnail" accept="image/*")
+                    span.d-none.imgName #{imgName}
+                    img.image-preview(src=product.thumbnail, alt="")
+                    .delete-image-preview.d-none
+                        i.fa-solid.fa-xmark(style="color: white")
+                .form-group
+                    label Trạng thái sản phẩm
+                    .form-check
+                        input#statusActive.form-check-input(type="radio" name="status" value="active" checked=product.status == "active" ? true : false)
+                        label.form-check-label(for="statusActive")  Hoạt động
+                    .form-check
+                        input#statusInactive.form-check-input(type="radio" name="status" value="inactive" checked=product.status == "inactive" ? true : false)
+                        label.form-check-label(for="statusInactive")  Không hoạt động
+                button.btn.btn-primary(type="submit") Cập nhật
+    else 
+        h1 Bạn không có quyền truy cập trang này

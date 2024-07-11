@@ -1,6 +1,7 @@
 const Accounts = require("../../models/accounts.model");
 const Roles = require("../../models/roles.model");
 const md5 = require("md5");
+const generate = require("../../helpers/generateString");
 
 module.exports.accounts = async (req, res) => {
   let find = {
@@ -37,6 +38,7 @@ module.exports.createPost = async (req, res) => {
     });
     if (!emailExist) {
       req.body.password = md5(req.body.password);
+      req.body.token = generate.generateRandomSring(20);
       const account = new Accounts(req.body);
       await account.save();
       req.flash("success", "Tạo tài khoản thành công");

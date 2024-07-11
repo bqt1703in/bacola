@@ -12,6 +12,8 @@ const bodyParser = require("body-parser");
 
 const Router = require("./routes/index.route");
 
+const moment = require("moment");
+
 const database = require("./config/database");
 database.connect();
 
@@ -25,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser("quangtruong1703"));
 app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
+
+app.locals.moment = moment;
 
 app.use(
   "/tinymce",
