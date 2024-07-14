@@ -40,6 +40,7 @@ block main
                         th(scope='col') Vị trí
                         th(scope='col') Trạng thái
                         th(scope='col') Người tạo
+                        th(scope='col') Người cập nhật
                         th(scope='col').action Hành động
                 tbody
                     if (products.length > 0)
@@ -65,9 +66,22 @@ block main
                                             button(class="btn btn-success") Hoạt động
                                         else 
                                             button(class="btn btn-danger") Không hoạt động
-                                td 
-                                    p Người tạo: #{product.fullName}
-                                    p Ngày tạo: #{moment(product.createdBy.createdAt).format("HH:mm:ss -- DD/MM/YYYY ")}
+                                td
+                                    if (product.createdBy.account_id)
+                                        p Người tạo: #{product.createdBy.fullName}
+                                        p Ngày tạo: #{moment(product.createdBy.createdAt).format("HH:mm:ss -- DD/MM/YYYY ")}
+                                    else 
+                                        p Người tạo: Chưa cập nhật
+                                        p Ngày tạo: Chưa cập nhật
+                                td
+                                    -var userUpdated = product.updatedBy.slice(-1)[0]
+                                    if (userUpdated)
+                                        p Người tạo: #{product.updatedBy.fullName}
+                                        p Ngày tạo: #{moment(userUpdated.createdAt).format("HH:mm:ss -- DD/MM/YYYY ")}
+                                    else 
+                                        p Người tạo: Chưa cập nhật
+                                        p Ngày tạo: Chưa cập nhật
+                                    
                                 td
                                     .action
                                         if (role_user.permissions.includes("products_delete"))
