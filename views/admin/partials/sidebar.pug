@@ -40,3 +40,7 @@ nav.col-md-2.d-none.d-md-block.sidebar
                 a.nav-link(href='/admin/auth/logout')
                     i.fas.fa-cogs
                     |  Đăng xuất
+            li.nav-item(sidebar-item)
+                a.nav-link(href='/admin/my-account')
+                    i.fas.fa-cogs
+                    |  #{user.fullName}

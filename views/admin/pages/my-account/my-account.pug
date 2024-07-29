@@ -1,0 +1,14 @@
+extends ../../layouts/default.pug 
+block main 
+    .main
+        h1 Thông tin cá nhân
+        div Họ và tên: #{user.fullName}
+        br
+        div Email: #{user.email}
+        br
+        div Số điện thoại: #{user.phone}
+        br
+        div Ảnh đại diện: 
+        img(src=user.avatar, alt="" style="width:150px")
+        br
+        a(href="/admin/my-account/edit") Cập nhật thông tin cá nhân

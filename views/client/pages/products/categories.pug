@@ -1,8 +1,7 @@
 extends ../../layouts/default.pug 
 include ../../mixins/heading.pug 
-include ../../mixins/submenu.pug 
+
 
 block main 
     .container
-        +heading("Trang chủ")
-        +submenu(categories)
+        +heading(category.title)

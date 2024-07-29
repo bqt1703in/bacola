@@ -1,0 +1,43 @@
+extends ../../layouts/default.pug 
+include ../../mixins/pagination.pug 
+include ../../mixins/form-search.pug 
+include ../../mixins/filter.pug 
+include ../../mixins/changeMulti.pug 
+include ../../mixins/alert.pug 
+include ../../mixins/sort.pug 
+
+block main 
+    if (user)
+        -if(messages.error) 
+            +alert-error(messages.error)
+        -if(messages.success) 
+            +alert-success(messages.success)
+        .main
+            .container
+                h2.mb-4.text-center.pt-4 Cập nhật tài khoản
+                form(action=`/admin/my-account/edit?_method=PATCH` method="POST" enctype="multipart/form-data")
+                    .form-group
+                        label(for="fullName") Họ và tên
+                        input#title.form-control(type="text" name="fullName" placeholder="Nhập họ và tên" value=user.fullName)
+                    .form-group
+                        label(for="email") Email
+                        input#title.form-control(type="email" name="email" placeholder="Nhập email" value=user.email)
+                    .form-group
+                        label(for="phone") Số điện thoại
+                        input#title.form-control(type="text" name="phone" placeholder="Nhập số điện thoại" value=user.phone)
+                    .form-group
+                        label(for="password") Mật khẩu
+                        input#title.form-control(type="password" name="password" placeholder="Nhập mật khẩu")
+                        input(type="checkbox" show-password onclick="showPassword()") 
+                        label(for="password") Hiện mật khẩu
+
+                    .form-group.upload-image(upload-image)
+                        label(for="avatar") Avatar
+                        input#productImage.form-control-file.input-image(type="file" name="avatar" accept="image/*")
+                        img.image-preview(src=user.avatar, alt="")
+                        .delete-image-preview.d-none
+                            i.fa-solid.fa-xmark(style="color: white")
+        
+                    button.btn.btn-primary(type="submit") Cập nhật
+    else 
+        h1 Bạn không có quyền truy cập trang này     
